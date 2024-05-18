@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&#10032Support Tool</title>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('image/galaxy.webp') no-repeat center center fixed;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  .input-container {
+    display: flex;
+    width: 320px;
+    margin-top: 10px;
+  }
+
+  .input-container input[type="text"] {
+    flex: 1;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .input-container button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .input-container button:hover {
+    background-color: #0056b3;
+  }
+
+  .message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .user-message {
+    background-color: #e1ffc7;
+    align-self: flex-start;
+  }
+  .empty{
+    height: 20px;
+  }
+
+  .bot-message {
+    background-color: #d1e7fd;
+    align-self: flex-end;
+  }
+  h1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .circle-image {
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+</style>
+</head>
+<body>
+  <h1><img src="image/Zodaic.jpeg" class="circle-image">Zodaic Sign Chatbox</h1>
+<div class="chat-container" id="chatContainer">
+  <!-- Chat messages will be displayed here -->
+</div>
+<div class="empty"></div>
+<div>
+  <input type="text" id="userInput" placeholder="Type your message...">
+  <button class="sendMessage">Send</button>
+</div>
+
+
+<script type="importmap">
+  {
+    "imports": {
+      "@google/generative-ai": "https://esm.run/@google/generative-ai"
+    }
+  }
+</script>
+<script type="module">
+  import { GoogleGenerativeAI } from "@google/generative-ai";
+  const API_KEY = "AIzaSyBjdSNMmlVGAv2Q00o-zA4yqlZTyL6P32o";
+  const genAI = new GoogleGenerativeAI(API_KEY);
+  
+  document.querySelector('.sendMessage').addEventListener('click',()=>{
+    run();
+  });
+  const userInput = document.getElementById('userInput');
+  userInput.addEventListener('keydown',(event)=>{
+    if (event.key === 'Enter'){
+      run();
+    }
+  });
+
+  async function run(){
+    const userInput = document.getElementById('userInput').value;
+    displayMessage(userInput,'user');
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+    const chat = model.startChat({
+      history: [
+      {
+        role: "user",
+        parts: [{ text: "hi" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: "Great to meet you. What would you like to know?" }],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is zodiac sign?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: "A zodiac sign is an astrological sign that corresponds to a specific segment of the sky, divided into twelve equal parts. These segments are associated with the constellations through which the Sun appears to move during the year. Each zodiac sign represents certain personality traits, behaviors, and influences based on the position of celestial bodies at the time of a person's birth. " }],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What are the birth-dates for each signs?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Aries (March 21 - April 19)
+                    Taurus (April 20 - May 20)
+                    Gemini (May 21 - June 20)
+                    Cancer (June 21 - July 22)
+                    Leo (July 23 - August 22)
+                    Virgo (August 23 - September 22)
+                    Libra (September 23 - October 22)
+                    Scorpio (October 23 - November 21)
+                    Sagittarius (November 22 - December 21)
+                    Capricorn (December 22 - January 19)
+                    Aquarius (January 20 - February 18)
+                    Pisces (February 19 - March 20)`
+                    }],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is the birth-dates for Aries?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Aries (March 21 - April 19)`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Sun sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `The Sun represents vitality, a sense of individuality, and outward-shining creative energy.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Moon sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `The Moon represents the emotional responses, unconscious pre-destination, and the self-image. The Moon represents the emotions, and the Moon sign shows how a person expresses themselves when at home, at ease, and comfortable.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Mercury sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Mercury represents communication, Cartesian and logical spirit.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Venus sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Venus represents an interest in emotions and values, exchange, and sharing with others, especially relationship.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Mar sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Mars represents the desire for action and physical energy.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Jupiter sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Jupiter represents expansion and grace.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Saturn sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Saturn represents contraction and effort.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Uranus sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Uranus represents individual liberty, egoistic liberty.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Neptune sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Neptune represents transcendental liberty, non-egoistic liberty.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Neptune sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Neptune represents transcendental liberty, non-egoistic liberty.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Pluto sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Pluto represents transformations, mutations, and elimination.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Lilith sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `Black Moon Lilith represents our darker, deeper natures that may be repressed or buried.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is North Node-South Node represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `The South Node represents our overdeveloped character traits. We are talented here but if we overdo this area of life or hold onto these traits to feel secure, we may stagnate. The North Node points to the qualities that we need to work on and develop to achieve inner balance and fulfillment.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 1 represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House I is the area of self identity. The ascendant is a symbol of how one acts in life. It is the image of the personality as seen by others, and the attitude that one has towards life.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 2 represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House II - the second house - is the area of material security and values. It rules money and personal finances, sense of self-worth and basic values, personal possessions.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 3 represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House III - the third house - is the area of social and intellectual learning.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 4 represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House IV - the fourth house - is the area of home, family, roots, and deep emotions/sense of self-worth.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 5 sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House V - the fifth house - is the area of creative self-expression, romance, entertainment, children, and gambling.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is Housr 6 sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House VI - the sixth house - is the area of learning by material transaction.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 7 represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House VII - the seventh house - is the area of one-to-one relationships such as marriage and partnership, and of social and intellectual action.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 8 sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House VIII - the eighth house - is the area of emotional security and of security of the soul.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 9 sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House IX - the ninth house - is the area of learning that shapes the identity.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 10 sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House X - the tenth house - is the area of material action. The Midheaven represents the work one will do in one's life, the place one will take in the world of society. It becomes more important as one grows older.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 11 sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House XI - the eleventh house - is the area of search for social and intellectual security.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What is House 12 sign represent?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House XII - the twelfth house - is the area of education and of emotion. This is where we meet our karma, deal with endings, and sometimes where we bury things.`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "What do Houses represent in Astrology?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `House I is the area of self identity. The ascendant is a symbol of how one acts in life. It is the image of the personality as seen by others, and the attitude that one has towards life.
+          House II - the second house - is the area of material security and values. It rules money and personal finances, sense of self-worth and basic values, personal possessions.
+          House III - the third house - is the area of social and intellectual learning.
+          House IV - the fourth house - is the area of home, family, roots, and deep emotions/sense of self-worth.
+          House V - the fifth house - is the area of creative self-expression, romance, entertainment, children, and gambling.
+          House VI - the sixth house - is the area of learning by material transaction.
+          House VII - the seventh house - is the area of one-to-one relationships such as marriage and partnership, and of social and intellectual action.
+          House VIII - the eighth house - is the area of emotional security and of security of the soul.
+          House IX - the ninth house - is the area of learning that shapes the identity.
+          House X - the tenth house - is the area of material action. The Midheaven represents the work one will do in one's life, the place one will take in the world of society. It becomes more important as one grows older.
+          House XI - the eleventh house - is the area of search for social and intellectual security.
+          House XII - the twelfth house - is the area of education and of emotion. This is where we meet our karma, deal with endings, and sometimes where we bury things.
+          `}],
+      },
+
+
+      
+      
+
+
+    ],
+    generationConfig: {
+      maxOutputTokens: 1000,
+    },
+    });
+    const result = await chat.sendMessage(userInput);
+    const response = await result.response;
+    const text = response.text();
+    displayMessage(text,'bot');
+
+  }
+
+  function displayMessage(message,role){
+    const chatConatainer = document.getElementById("chatContainer");
+    const messageElement = document.createElement("div");
+
+    // Add labels for "user" and "bot" messages
+    const label = document.createElement("span");
+    label.innerText = role === 'user' ? 'User: ' : 'Bot: ';
+    label.style.fontWeight = 'bold';
+
+    messageElement.appendChild(label);
+
+    // Set class based on role for styling
+    messageElement.className = `message ${role === 'user' ? 'user-message' : 'bot-message'}`;
+
+    // Add message content
+    const messageContent = document.createElement("span");
+    messageContent.innerText = message;
+
+    messageElement.appendChild(messageContent);
+
+    // Append message element to chat container
+    chatContainer.appendChild(messageElement);
+
+    // Scroll to the bottom of the chat container
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    document.getElementById("userInput").value="";
+}  
+
+  
+  
+
+</script>
+</body>
+</html>
