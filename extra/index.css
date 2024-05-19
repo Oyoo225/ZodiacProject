@@ -55,6 +55,9 @@ body {
     justify-content: space-between;
 }
 button {
+    border-radius: 10%;
+    background-color: white;
+    border: solid 1px white;
     padding: 10px 20px;
     cursor: pointer;
 }
@@ -63,4 +66,9 @@ a {
     margin-top: 20px;
     color: blue;
     text-decoration: none;
+}
+.chatbox{
+    width: 40px;
+    height: 40px;
+    border-radius: 25%;
 }

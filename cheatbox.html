@@ -4,98 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>&#10032Support Tool</title>
-<style>
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: url('image/galaxy.webp') no-repeat center center fixed;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-  }
-
-  .chat-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 300px;
-    height: 400px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    padding: 10px;
-  }
-
-  .input-container {
-    display: flex;
-    width: 320px;
-    margin-top: 10px;
-  }
-
-  .input-container input[type="text"] {
-    flex: 1;
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-  }
-
-  .input-container button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-  }
-
-  .input-container button:hover {
-    background-color: #0056b3;
-  }
-
-  .message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  .user-message {
-    background-color: #e1ffc7;
-    align-self: flex-start;
-  }
-  .empty{
-    height: 20px;
-  }
-
-  .bot-message {
-    background-color: #d1e7fd;
-    align-self: flex-end;
-  }
-  h1 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .circle-image {
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-</style>
+<link rel="stylesheet" href="extra/chat.css">
 </head>
 <body>
+  <a href="index.html"><img src="image/back1.jpeg" class="back-button" alt="Back"></a>
   <h1><img src="image/Zodaic.jpeg" class="circle-image">Zodaic Sign Chatbox</h1>
+  
 <div class="chat-container" id="chatContainer">
   <!-- Chat messages will be displayed here -->
 </div>
@@ -172,7 +86,7 @@
       },
       {
         role: "user",
-        parts: [{ text: "What is the birth-dates for Aries?" }],
+        parts: [{ text: "What is the birth date of aries?" }],
       },
       {
         role: "model",
@@ -306,30 +220,7 @@
         role: "model",
         parts: [{ text: `House III - the third house - is the area of social and intellectual learning.`}],
       },
-      {
-        role: "user",
-        parts: [{ text: "What is House 4 represent?" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: `House IV - the fourth house - is the area of home, family, roots, and deep emotions/sense of self-worth.`}],
-      },
-      {
-        role: "user",
-        parts: [{ text: "What is House 5 sign represent?" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: `House V - the fifth house - is the area of creative self-expression, romance, entertainment, children, and gambling.`}],
-      },
-      {
-        role: "user",
-        parts: [{ text: "What is Housr 6 sign represent?" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: `House VI - the sixth house - is the area of learning by material transaction.`}],
-      },
+      
       {
         role: "user",
         parts: [{ text: "What is House 7 represent?" }],
@@ -349,26 +240,6 @@
       {
         role: "user",
         parts: [{ text: "What is House 9 sign represent?" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: `House IX - the ninth house - is the area of learning that shapes the identity.`}],
-      },
-      {
-        role: "user",
-        parts: [{ text: "What is House 10 sign represent?" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: `House X - the tenth house - is the area of material action. The Midheaven represents the work one will do in one's life, the place one will take in the world of society. It becomes more important as one grows older.`}],
-      },
-      {
-        role: "user",
-        parts: [{ text: "What is House 11 sign represent?" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: `House XI - the eleventh house - is the area of search for social and intellectual security.`}],
       },
       {
         role: "user",
@@ -397,6 +268,39 @@
           House XI - the eleventh house - is the area of search for social and intellectual security.
           House XII - the twelfth house - is the area of education and of emotion. This is where we meet our karma, deal with endings, and sometimes where we bury things.
           `}],
+          
+      },
+      {
+        role: "user",
+        parts: [{ text: "สวัสดี" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: ` สวัสดี ฉันจะช่วยคุณได้อย่างไร?`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "วันเกิดของราศีเมษคืออะไร?" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `ราศีเมษ (21 มีนาคม - 19 เมษายน)`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "你好" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `你好，我能帮你什么忙`}],
+      },
+      {
+        role: "user",
+        parts: [{ text: "太阳星座代表什么" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: `太阳代表着活力、个性感和外在闪耀的创造力。`}],
       },
 
 
