@@ -68,7 +68,10 @@ a {
     text-decoration: none;
 }
 .chatbox{
-    width: 40px;
-    height: 40px;
-    border-radius: 25%;
+     position: absolute;
+        border-radius: 25%;
+        top: 50px;
+        left: 40px;
+        width: 40px;
+        height: 40px;
 }
